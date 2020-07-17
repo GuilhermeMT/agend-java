@@ -55,18 +55,6 @@ public class ViewPrimeiraTela extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		//Listener btnAdd
-		JButton btnAdd = new JButton("Adicionar");
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				JOptionPane.showMessageDialog(null, "Nome: " + txtNome.getText());
-				
-			}
-		});
-		btnAdd.setBounds(315, 39, 89, 23);
-		contentPane.add(btnAdd);
-		
 		txtNome = new JTextField();
 		txtNome.setBounds(10, 28, 124, 20);
 		contentPane.add(txtNome);
@@ -86,7 +74,7 @@ public class ViewPrimeiraTela extends JFrame {
 		txtSobrenome.setColumns(10);
 		
 		JLabel lblEmpresa = new JLabel("Empresa");
-		lblEmpresa.setBounds(10, 59, 46, 14);
+		lblEmpresa.setBounds(10, 59, 258, 14);
 		contentPane.add(lblEmpresa);
 		
 		txtEmpresa = new JTextField();
@@ -95,7 +83,7 @@ public class ViewPrimeiraTela extends JFrame {
 		txtEmpresa.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("E-mail");
-		lblEmail.setBounds(10, 108, 46, 14);
+		lblEmail.setBounds(10, 108, 258, 14);
 		contentPane.add(lblEmail);
 		
 		txtEmail = new JTextField();
@@ -104,7 +92,7 @@ public class ViewPrimeiraTela extends JFrame {
 		txtEmail.setColumns(10);
 		
 		JLabel lblNumero = new JLabel("Numero:");
-		lblNumero.setBounds(10, 154, 46, 14);
+		lblNumero.setBounds(10, 154, 258, 14);
 		contentPane.add(lblNumero);
 		
 		txtNumero = new JTextField();
@@ -113,7 +101,7 @@ public class ViewPrimeiraTela extends JFrame {
 		txtNumero.setColumns(10);
 		
 		JLabel lblTipoNumero = new JLabel("Tipo Telefone");
-		lblTipoNumero.setBounds(10, 204, 80, 14);
+		lblTipoNumero.setBounds(10, 204, 124, 14);
 		contentPane.add(lblTipoNumero);
 		
 		JComboBox cmbTipoTelefone = new JComboBox();
@@ -125,15 +113,40 @@ public class ViewPrimeiraTela extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setBounds(315, 76, 89, 23);
 		contentPane.add(btnVoltar);
+		
+		//Listener btnAdd
+				JButton btnAdd = new JButton("Adicionar");
+				btnAdd.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						if(checarCampos()) {
+							ContatoModel contatoModel = new ContatoModel();
+							contatoModel.setNome(txtNome.getText());
+							contatoModel.setSobrenome(txtSobrenome.getText());
+							contatoModel.setEmpresa(txtEmpresa.getText());
+							contatoModel.setEmail(txtEmail.getText());
+							contatoModel.setNumero(txtNumero.getText());
+							contatoModel.setTipotelefone(String.valueOf(cmbTipoTelefone.getSelectedItem()));
+							JOptionPane.showMessageDialog(null, "Contato Salvo");
+							System.out.println(contatoModel);
+						}
+						
+					}
+				});
+				btnAdd.setBounds(315, 39, 89, 23);
+				contentPane.add(btnAdd);
+		
 	}
 	
 	//metodo para checar os campos
 	private boolean checarCampos() {
 		
 		if(txtNome.getText().toString() == "") {
-			
-		}else {
-			
+			JOptionPane.showMessageDialog(this, "Campo nome deve ser preenchido.");
+			return false;
+		}else if(txtSobrenome.getText().toString() == ""){
+			JOptionPane.showMessageDialog(this, "Campo sobrenome deve ser preenchido.");
+			return false;
 		}
 		
 		return true;

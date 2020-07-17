@@ -1,7 +1,8 @@
 package model;
 
 public class ContatoModel {
-
+	
+	private int id;
 	private String nome, sobrenome;
 	private String empresa;
 	private String email;
@@ -69,5 +70,11 @@ public class ContatoModel {
 	
 	public boolean excluirContato() {
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ContatoModel [nome=" + nome + ", sobrenome=" + sobrenome + ", empresa=" + empresa + ", email=" + email
+				+ ", numero=" + numero + ", tipotelefone=" + tipotelefone + "]";
 	}
 }
