@@ -3,32 +3,25 @@ package data;
 import java.sql.*;
 
 public class Conexao{
-	{
+	String connectionUrl = "jdbc:sqlserver://localhost:1433;databasename=ProjetoAgenda";
+	String user = "sa";
+	String pass= "12345";
+	Connection conn = null;
 	
-	try{
-		String connectionUrl = "jdbc:sqlserver://localhost:1433;databasename=ProjetoAgenda";
-
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-		
-		Connection conn = DriverManager.getConnection(connectionUrl,"sa","12345");
-
-		System.out.println("Conexao obtida com sucesso");
-		
-		conn.close();
-
-	}catch(SQLException e) {
-		e.printStackTrace();
-	}catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (InstantiationException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IllegalAccessException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}finally {
+	public Conexao() throws SQLException{
+		conn = DriverManager.getConnection(connectionUrl,user,pass);
 	}
-
-
-}}
+	
+	public boolean executeSql(String sql) throws SQLException {
+		Statement st = conn.createStatement();
+		st.executeQuery("SELECT * FROM tbl_contato");
+		
+		ResultSet rs = st.getResultSet();
+		
+		while(rs.next()) {
+			System.out.println(rs.getString("nome"));
+		}
+		conn.close();
+		return true;
+	}
+}

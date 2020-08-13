@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
@@ -135,7 +136,13 @@ public class ViewPrimeiraTela extends JFrame {
 					System.out.println(contatoModel);
 				}*/
 				
-				Conexao con = new Conexao();
+				try {
+					Conexao con = new Conexao();
+					con.executeSql("");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 
 			}
