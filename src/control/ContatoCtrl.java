@@ -5,7 +5,7 @@ import model.ContatoModel;
 public class ContatoCtrl {
 
 	public boolean salvarContato(ContatoModel contato) {
-		
+			
 		return true;
 	}
 	
